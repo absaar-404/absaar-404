@@ -206,6 +206,10 @@
   ],
   "links": [
     [
+      "i@absaar.dev",
+      "mailto:i@absaar.dev"
+    ],
+    [
       "absaar.dev",
       "https://absaar.dev"
     ],
@@ -215,9 +219,9 @@
     ]
   ],
   "brief": {
-    "mission": "Designing Zero-Trust network architectures and automated compliance pipelines at AHS Properties, supporting more than 300 enterprise users across Dubai.",
+    "mission": "Designing Zero-Trust network architectures and automated compliance pipelines at AHS Properties, supporting more than 300 enterprise users.",
     "employer": "AHS PROPERTIES",
-    "location": "DUBAI · UAE",
+    "location": "UAE",
     "users": "300+",
     "collaboration": [
       "Multi-cloud DevSecOps",
@@ -254,7 +258,7 @@
       ],
       [
         "PRINCIPAL SOFTWARE ARCHITECT & INFRA DEVOPS",
-        "Zero-trust architecture and compliance pipelines, 300+ users, Dubai"
+        "Zero-trust architecture and compliance pipelines for 300+ enterprise users"
       ]
     ],
     "ecosystem": [
@@ -400,5 +404,6 @@
       "syncing github telemetry ..... OK",
       "boot complete · welcome"
     ]
-  }
+  },
+  "email": "i@absaar.dev"
 }

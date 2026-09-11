@@ -237,7 +237,7 @@ def auth(f: Fonts, data: dict) -> Card:
     kx, ky = 840, 156
     c.panel(kx, ky, 888, 340, "VERIFICATION SEQUENCE")
     checks = [("IDENTITY", "GitHub handle matches profile owner"), ("ROLE", "Principal Software Architect & Infra DevOps"),
-              ("MISSION", f"{brief['employer']} · {brief['users']} users · Dubai"), ("SYSTEMS", "26 systems on record · 17 operational"),
+              ("MISSION", f"{brief['employer']} · {brief['users']} users"), ("SYSTEMS", "26 systems on record · 17 operational"),
               ("POSTURE", "Zero trust · every edge is a checkpoint"), ("ACCESS", "Granted · continue to briefing")]
     for i, (k, v) in enumerate(checks):
         y = ky + 76 + i * 42
@@ -253,7 +253,7 @@ def auth(f: Fonts, data: dict) -> Card:
 # =========================================================== 03 · MISSION
 def mission(f: Fonts, data: dict) -> Card:
     profile, brief = data["profile"], data["profile"]["brief"]
-    c = Card(f, 600, "Mission briefing", "Current mission at AHS Properties in Dubai — zero-trust network architectures "
+    c = Card(f, 600, "Mission briefing", "Current mission at AHS Properties in UAE — zero-trust network architectures "
              "and automated compliance pipelines for more than 300 enterprise users.",
              code="SEQ · 03", heading="MISSION BRIEFING", status=("ACTIVE", P.purple), accent=P.purple)
     d = c.doc
@@ -264,7 +264,7 @@ def mission(f: Fonts, data: dict) -> Card:
         yy += 40
     objs = [("ZERO-TRUST NETWORK", "Every segment a checkpoint; identity before access.", P.purple),
             ("AUTOMATED COMPLIANCE", "Baseline pipelines that enforce and prove policy.", P.blue),
-            (f"{brief['users']} USERS", "Enterprise users supported across Dubai.", P.ok)]
+            (f"{brief['users']} USERS", "Enterprise users supported .", P.ok)]
     for i, (t, sub, col) in enumerate(objs):
         x = 72 + i * 360
         y = 360
@@ -310,7 +310,7 @@ def operations(f: Fonts, data: dict) -> Card:
         c.mono(s["verb"], 1040, y, 9.5, P.muted, anchor="end", tracking=0.18)
     c.mono("BARS SHOW ACTIVITY, NOT COMPLETION — STATUS IS THE RECORD.", 96, 696, 9.5, P.dim, tracking=0.12)
     # right column
-    blocks = [("OPEN TO COLLABORATE", brief["collaboration"], P.ok), ("LEARNING TRACK", brief["learning"], P.blue), ("ASK ME ABOUT", brief["expertise"], P.purple)]
+    blocks = [("OPEN TO COLLABORATE  ·  " + data["profile"]["email"].upper(), brief["collaboration"], P.ok), ("LEARNING TRACK", brief["learning"], P.blue), ("ASK ME ABOUT", brief["expertise"], P.purple)]
     y = 156
     for title, items, col in blocks:
         h = 44 + 24 * len(items)
@@ -509,7 +509,8 @@ def comms(f: Fonts, data: dict) -> Card:
     d.rect(tx, ty, tw, 34, fill="#EEF2F7", rx=10)
     for i, col in enumerate(("#FF5F57", "#FEBC2E", "#28C840")):
         d.circle(tx + 22 + i * 20, ty + 17, 6, fill=col)
-    lines = [f"contact --web      {profile['site']}", f"contact --github   github.com/{profile['handle']}",
+    lines = [f"contact --mail     {profile['email']}", f"contact --web      {profile['site']}",
+             f"contact --github   github.com/{profile['handle']}",
              f"status             OPEN TO COLLABORATE · {brief['location']}"]
     _typewriter(c, lines, tx + 28, ty + 70, 14, P.text, start=0.3, prompt="$ ")
     c.footer("END OF SEQUENCE  ·  THANK YOU FOR VISITING THE CONTROL PLANE", f"{profile['name']} · {profile['role']}")
@@ -564,7 +565,7 @@ def network(f: Fonts, data: dict) -> Card:
 
     # ---- sites
     sites = [
-        (72, "SITE A", f"DUBAI HQ  ·  {brief['users']} USERS", True),
+        (72, "SITE A", f"HEADQUARTERS  ·  {brief['users']} USERS", True),
         (980, "SITE B", "REMOTE SITE  ·  BRANCH / DR", False),
     ]
     for sx, name, sub, hq in sites:

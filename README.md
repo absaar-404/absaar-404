@@ -1,8 +1,8 @@
 <a href="https://absaar.dev"><img src="assets/clearance/01-boot.svg" width="100%" alt="System boot: terminal boot log and an ASCII rendering of a rotating core."></a>
 
-<img src="assets/clearance/02-auth.svg" width="100%" alt="Identity authentication: clearance badge for Absaar IT, Principal Software Architect and Infra DevOps, Dubai; verification checks completing.">
+<img src="assets/clearance/02-auth.svg" width="100%" alt="Identity authentication: clearance badge for Absaar IT, Principal Software Architect and Infra DevOps, UAE; verification checks completing.">
 
-<img src="assets/clearance/03-mission.svg" width="100%" alt="Mission briefing: zero-trust network architectures and automated compliance pipelines at AHS Properties for more than 300 enterprise users across Dubai. Identity matrix 404 // 0404.">
+<img src="assets/clearance/03-mission.svg" width="100%" alt="Mission briefing: zero-trust network architectures and automated compliance pipelines at AHS Properties for more than 300 enterprise users . Identity matrix 404 // 0404.">
 
 <img src="assets/clearance/04-operations.svg" width="100%" alt="Current operations: workstreams in development and test; collaboration interests, learning track, ask-me-about.">
 
@@ -10,7 +10,7 @@
 
 <img src="assets/clearance/06-architecture.svg" width="100%" alt="Infrastructure architecture: service topology of 26 systems with a zero-trust perimeter ring and root at the centre.">
 
-<img src="assets/clearance/07-network.svg" width="100%" alt="Enterprise network — site-to-site architecture: Dubai HQ and a remote site joined by an encrypted WireGuard/IPsec tunnel; edge firewalls, core switches, segmented VLANs behind zero-trust checkpoints, identity, data centre, SOC telemetry and hybrid cloud above.">
+<img src="assets/clearance/07-network.svg" width="100%" alt="Enterprise network — site-to-site architecture: headquarters and a remote site joined by an encrypted WireGuard/IPsec tunnel; edge firewalls, core switches, segmented VLANs behind zero-trust checkpoints, identity, data centre, SOC telemetry and hybrid cloud above.">
 
 <img src="assets/clearance/08-automation.svg" width="100%" alt="Automation engine: corporate auto-onboarding pipeline — three fields, one package, twenty-five endpoints in one run.">
 
@@ -60,5 +60,5 @@
 <sub>Confidential work is not listed. Figures that have not been characterised are not shown.</sub>
 </details>
 
-<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL SOFTWARE ARCHITECT &amp; INFRA DEVOPS &nbsp;·&nbsp; <a href="https://absaar.dev">absaar.dev</a> &nbsp;·&nbsp; github.com/absaar-404<br>
+<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL SOFTWARE ARCHITECT &amp; INFRA DEVOPS &nbsp;·&nbsp; <a href="mailto:i@absaar.dev">i@absaar.dev</a> &nbsp;·&nbsp; <a href="https://absaar.dev">absaar.dev</a> &nbsp;·&nbsp; github.com/absaar-404<br>
 Cards are generated from <code>tools/console</code>; telemetry refreshes daily. Where a required tool did not exist, it was built.</sub></p>

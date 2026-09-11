@@ -23,5 +23,5 @@
 <sub>Confidential work is not listed. Figures that have not been characterised are not shown.</sub>
 </details>
 
-<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL SOFTWARE ARCHITECT &amp; INFRA DEVOPS &nbsp;·&nbsp; <a href="https://{{SITE}}">{{SITE}}</a> &nbsp;·&nbsp; github.com/{{HANDLE}}<br>
+<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL SOFTWARE ARCHITECT &amp; INFRA DEVOPS &nbsp;·&nbsp; <a href="mailto:i@absaar.dev">i@absaar.dev</a> &nbsp;·&nbsp; <a href="https://{{SITE}}">{{SITE}}</a> &nbsp;·&nbsp; github.com/{{HANDLE}}<br>
 Cards are generated from <code>tools/console</code>; telemetry refreshes daily. Where a required tool did not exist, it was built.</sub></p>
