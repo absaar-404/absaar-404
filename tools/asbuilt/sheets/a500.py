@@ -66,6 +66,7 @@ def make(faces, pal, data) -> dict:
     pts = [(x, y) for _, x, y, _ in STATIONS]
     d = "M" + " L".join(f"{fmt(x)},{fmt(y)}" for x, y in pts)
     s.doc.path(d, stroke=p.ink, width=HAIR, stroke_dasharray="10 6")
+    s.doc.add(f'<circle r="6" fill="none" stroke="{p.ink}" stroke-width="{MEDIUM}"><animateMotion dur="14s" repeatCount="indefinite" path="{d}"/></circle>')
     s.text("SCROLL-DRIVEN CAMERA PATH", pts[0][0] - 60, pts[0][1] - 60, 10, color=p.grey, tracking=0.14)
     s.doc.line(pts[0][0] - 60, pts[0][1] - 52, pts[0][0] - 6, pts[0][1] - 6, stroke=p.ink, width=HAIR)
 

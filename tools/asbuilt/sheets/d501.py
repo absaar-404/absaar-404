@@ -51,6 +51,8 @@ def make(faces, pal, data) -> dict:
     # viewport marker (visible area)
     s.doc.rect(px - 14, py + 120, pw + 28, 260, stroke=p.ink, width=HAIR, stroke_dasharray="3 5")
 
+    # capture sweep
+    s.sweep(px + 4, py + 56, pw - 8, py + ph - 6, dur=6.0, thickness=2.5, opacity=0.6)
     # Capture brackets — OUTSIDE the page, by a clear margin
     m, L = 26, 70
     for (cx, cy, sx, sy_) in ((px - m, py - m, 1, 1), (px + pw + m, py - m, -1, 1),

@@ -66,6 +66,24 @@ class Lettering:
             out.append(cur)
         return out
 
+    # -- motion (SMIL; subtle, drafting-appropriate) -------------------------
+
+    def packet(self, x1: float, y1: float, x2: float, y2: float, dur: float = 2.4,
+               r: float = 3.0, begin: float = 0.0, color: str | None = None) -> None:
+        """A dot travelling along a line — data moving through the drawing."""
+        self.doc.add(f'<circle r="{fmt(r)}" fill="{color or self.pal.ink}"><animateMotion dur="{dur:.2f}s" '
+                     f'begin="{begin:.2f}s" repeatCount="indefinite" path="M{fmt(x1)},{fmt(y1)} L{fmt(x2)},{fmt(y2)}"/></circle>')
+
+    def blink(self, x: float, y: float, r: float, dur: float = 2.0, begin: float = 0.0, color: str | None = None) -> None:
+        self.doc.add(f'<circle cx="{fmt(x)}" cy="{fmt(y)}" r="{fmt(r)}" fill="{color or self.pal.ink}">'
+                     f'<animate attributeName="opacity" values="1;0.15;1" dur="{dur:.2f}s" begin="{begin:.2f}s" repeatCount="indefinite"/></circle>')
+
+    def sweep(self, x: float, y0: float, w: float, y1: float, dur: float = 5.0, thickness: float = 2.0,
+              color: str | None = None, opacity: float = 0.7) -> None:
+        """A horizontal line travelling from y0 to y1 and back — a scan."""
+        self.doc.add(f'<rect x="{fmt(x)}" y="{fmt(y0)}" width="{fmt(w)}" height="{fmt(thickness)}" fill="{color or self.pal.ink}" opacity="{opacity}">'
+                     f'<animate attributeName="y" values="{fmt(y0)};{fmt(y1)};{fmt(y0)}" dur="{dur:.2f}s" repeatCount="indefinite"/></rect>')
+
     def save(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(self.doc.render(), encoding="utf-8")

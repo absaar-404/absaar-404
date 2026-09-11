@@ -72,7 +72,8 @@ def tag(s: Sheet, x: float, y: float, no: str, clouded: bool = False, w: float =
 
 def cloud(s: Sheet, x: float, y: float, w: float, h: float, r: float = 8.0) -> None:
     """Revision cloud — the only red on the sheet."""
-    s.doc.path(cloud_path(x, y, w, h, r), stroke=s.pal.red, width=HAIR * 1.8)
+    s.doc.add(f'<path d="{cloud_path(x, y, w, h, r)}" fill="none" stroke="{s.pal.red}" stroke-width="{HAIR * 1.8}" '
+              f'stroke-dasharray="7 3"><animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.6s" repeatCount="indefinite"/></path>')
 
 
 def room_tag(s: Sheet, cx: float, cy: float, name: str, zid: str, size: float = 15) -> None:

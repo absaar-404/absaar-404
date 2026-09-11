@@ -121,13 +121,15 @@ def draw_plan(s, data: dict, ox: float, oy: float, scale: float, dense: bool) ->
 
     # Section reference through the perimeter (A-300) and detail reference (D-501)
     cut_y = Y(430)
-    s.doc.line(X(PX0) - 26, cut_y, X(PX0 + INSET) + 10, cut_y, stroke=p.ink, width=MEDIUM, stroke_dasharray="14 6 3 6")
+    s.doc.add(f'<line x1="{X(PX0) - 26}" y1="{cut_y}" x2="{X(PX0 + INSET) + 10}" y2="{cut_y}" stroke="{p.ink}" stroke-width="{MEDIUM}" '
+              f'stroke-dasharray="14 6 3 6"><animate attributeName="stroke-dashoffset" from="0" to="-29" dur="2.4s" repeatCount="indefinite"/></line>')
     section_marker(s, X(PX0) - 44, cut_y, "A", "A-300", direction="down")
     for sy in data["systems"]:
         if sy.get("detail_sheet") and "_pos" in sy:
             tx, ty = sy["_pos"]
             cx, cy = tx + S(TAG_W) / 2, ty + S(TAG_H) / 2
-            s.doc.circle(cx, cy, S(44), stroke=p.ink, width=HAIR, stroke_dasharray="6 4")
+            s.doc.add(f'<circle cx="{cx}" cy="{cy}" r="{S(44)}" fill="none" stroke="{p.ink}" stroke-width="{HAIR}" stroke-dasharray="6 4">'
+                      f'<animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" dur="24s" repeatCount="indefinite"/></circle>')
             s.doc.line(cx - S(31), cy - S(31), cx - S(48), cy - S(62), stroke=p.ink, width=HAIR)
             section_marker(s, cx - S(48), cy - S(80), "1", sy["detail_sheet"], direction="none")
 

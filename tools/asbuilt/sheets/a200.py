@@ -62,11 +62,15 @@ def make(faces, pal, data) -> dict:
         s.text(ln, px + 85, py + 74 + i * 20, 12, anchor="middle", tracking=0.12)
     s.doc.line(fx + 190, py + 75, px, py + 75, stroke=p.ink, width=HAIR)
     arrow(s, fx + 190, py + 75, px - 2, py + 75, width=HAIR)
+    for i in range(3):
+        s.packet(fx + 150, fy + i * 54 + 17, fx + 190, fy + i * 54 + 17, dur=1.2, r=2.4, begin=i * 0.4)
+    s.packet(fx + 190, py + 75, px - 2, py + 75, dur=1.4, r=2.6, begin=0.6)
 
     # Bus
     bx = 640
     top_y, bot_y = 236, 900
     s.doc.line(px + 170, py + 75, bx, py + 75, stroke=p.ink, width=HEAVY)
+    s.packet(px + 170, py + 75, bx, py + 75, dur=1.0, r=3.2, begin=1.8)
     s.doc.line(bx, top_y, bx, bot_y, stroke=p.ink, width=HEAVY)
     s.text("DISTRIBUTION BUS", bx + 10, bot_y + 4, 10, tracking=0.12, color=p.grey)
 
@@ -78,6 +82,7 @@ def make(faces, pal, data) -> dict:
     for r in range(rows):
         ry = ey0 + r * dy
         s.doc.line(bx, ry + eh / 2, ex0 + (cols - 1) * dx + ew / 2, ry + eh / 2, stroke=p.ink, width=HAIR)
+        s.packet(bx, ry + eh / 2, ex0 + (cols - 1) * dx + ew / 2, ry + eh / 2, dur=3.0, r=2.6, begin=r * 0.5)
         for c in range(cols):
             k += 1
             x = ex0 + c * dx

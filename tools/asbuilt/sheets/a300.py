@@ -57,6 +57,8 @@ def make(faces, pal, data) -> dict:
                        fill="url(#poche)" if i == layers - 1 else "none")
             if side > 0:
                 s.text(f"L{i+1}", x + band / 2, top - i * 10 - 8, 9.5, anchor="middle", color=p.grey)
+            s.doc.add(f'<rect x="{x}" y="{top - i * 10}" width="{band}" height="{bot - (top - i * 10)}" fill="{p.ink}" opacity="0">'
+                      f'<animate attributeName="opacity" values="0;0.35;0" dur="3.2s" begin="{i * 0.3:.1f}s" repeatCount="indefinite"/></rect>')
         # ties between symmetrical bands
     # server
     s.doc.rect(cx - sw / 2, bot - sh, sw, sh, stroke=p.ink, width=HEAVY, fill=p.paper)
@@ -86,7 +88,7 @@ def make(faces, pal, data) -> dict:
         y = ry + i * slot_h
         s.doc.rect(rx + 22, y, rw - 44, slot_h - 5, stroke=p.ink, width=MEDIUM)
         s.text(f"E{i+1:02d}", rx + 34, y + 12.5, 8.5, color=p.grey)
-        s.doc.circle(rx + rw - 40, y + (slot_h - 5) / 2, 2.2, fill=p.ink)
+        s.blink(rx + rw - 40, y + (slot_h - 5) / 2, 2.4, dur=0.9 + (i * 7 % 11) * 0.2)
     # rack feet
     s.doc.line(rx, gy, rx + rw, gy, stroke=p.ink, width=HEAVY)
     dimension(s, rx + rw + 22, ry, rx + rw + 22, ry + engines * slot_h - 5, f"{engines} ENGINES", offset=0, size=11)
@@ -96,8 +98,10 @@ def make(faces, pal, data) -> dict:
            color=p.grey, tracking=0.04)
     # in / out
     arrow(s, rx - 150, ry + 120, rx - 4, ry + 120)
+    s.packet(rx - 150, ry + 120, rx - 4, ry + 120, dur=1.6, r=2.6)
     s.text("ENDPOINT TELEMETRY", rx - 150, ry + 108, 9.5, color=p.grey, tracking=0.1)
     arrow(s, rx + rw + 90, ry + 300, rx + rw + 196, ry + 300)
+    s.packet(rx + rw + 90, ry + 300, rx + rw + 196, ry + 300, dur=1.6, r=2.6, begin=0.8)
     s.text("ALERT · RESPONSE", rx + rw + 90, ry + 288, 9.5, color=p.grey, tracking=0.1)
     s.text("RMM", rx + rw + 90, ry + 322, 9.5, color=p.grey, tracking=0.1)
     for j, f in enumerate(["DETECTION", "MONITORING", "RESPONSE"]):

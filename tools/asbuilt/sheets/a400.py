@@ -87,6 +87,7 @@ def make(faces, pal, data) -> dict:
         _symbol(s, in_kind, in_x, y)
         s.text(in_label, in_x, y + 66, 10, anchor="middle", color=p.grey, tracking=0.1)
         arrow(s, in_x + 70, y, box_x - 6, y, width=MEDIUM)
+        s.packet(in_x + 70, y, box_x - 6, y, dur=2.2, r=3, begin=i * 0.5)
         # process
         s.doc.rect(box_x, y - 44, box_w, 88, stroke=p.ink, width=HEAVY, fill=p.paper)
         tag(s, box_x + 16, y - 30, sy["no"], clouded=clouded(sy))
@@ -96,6 +97,7 @@ def make(faces, pal, data) -> dict:
         if note:
             s.text(note.upper(), box_x + 90, y + 32, 9, color=p.grey, tracking=0.04)
         arrow(s, box_x + box_w + 6, y, out_x - 70, y, width=MEDIUM)
+        s.packet(box_x + box_w + 6, y, out_x - 70, y, dur=2.2, r=3, begin=i * 0.5 + 1.1)
         # output
         _symbol(s, out_kind, out_x, y)
         s.text(out_label, out_x, y + 66, 10, anchor="middle", color=p.grey, tracking=0.1)
