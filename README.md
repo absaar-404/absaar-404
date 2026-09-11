@@ -41,7 +41,7 @@
 | 302 | Agent Flow | Document Room | Operational | Agency documents (OCR) → Structured Excel for Salesforce migration |
 | 303 | CAD Drawing Auto-Documentation | Document Room | Deploying | CAD drawings and specifications (precision OCR) → Populated structured documentation |
 | 304 | AMSIH-one PDF Editor | Document Room | Operational | PDF → Lightweight PDF editing, practical everyday tools |
-| 401 | HayaScope HyperSync | Tool Workshop | Deploying | Any page, region, window, tab set or URL list → Annotated PNG / JPG / PDF (continuous or A4), clipboard, print, email — all processed locally |
+| 401 | HayaScope HyperSync | Tool Workshop | Deploying | Any page, window, tab set or URL list → Annotated PNG / JPG / PDF (continuous or A4), clipboard, print, email — all processed locally |
 | 402 | Android Mobile Browser SDK | Tool Workshop | Deploying | Web → No ads, no bloat, no popups; tracker blocking; anonymous browsing |
 | 403 | Browser Extension / Themes | Tool Workshop | Operational | Working environment → Dense astrophotography starfield; calm animated starfield |
 | 404 | Renata Code | Tool Workshop | In test | PHP, Python, HTML source → Live rendered output beside the code |
