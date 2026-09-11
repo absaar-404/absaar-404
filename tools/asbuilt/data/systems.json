@@ -1,0 +1,398 @@
+{
+  "project": {
+    "name": "NEBULA CORE CLUSTER",
+    "sector": "ROOT SECTOR",
+    "number": "0404",
+    "drawn_by": "ABSAAR IT",
+    "role": "PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+    "site": "absaar.dev",
+    "github": "absaar-404",
+    "issue": "2026-09",
+    "revision": "A",
+    "scale": "NTS"
+  },
+  "statuses": {
+    "BUILT": {
+      "label": "BUILT",
+      "cloud": false,
+      "note": "in service"
+    },
+    "IN TEST": {
+      "label": "IN TEST",
+      "cloud": true,
+      "note": "testing"
+    },
+    "IN DEV": {
+      "label": "IN DEV",
+      "cloud": true,
+      "note": "in development"
+    }
+  },
+  "zones": [
+    {
+      "id": "01",
+      "name": "SERVICE CORE",
+      "sheet": "A-200",
+      "desc": "Fleet configuration, policy, asset register, ticket intake, bulk processing."
+    },
+    {
+      "id": "02",
+      "name": "SECURITY PERIMETER",
+      "sheet": "A-300",
+      "desc": "Detection, response and intrusion alerting, built in layers."
+    },
+    {
+      "id": "03",
+      "name": "DOCUMENT ROOM",
+      "sheet": "A-400",
+      "desc": "OCR and document pipelines: paper and drawings in, structured data out."
+    },
+    {
+      "id": "04",
+      "name": "TOOL WORKSHOP",
+      "sheet": "A-100",
+      "desc": "End-user tools: capture, browsing, editing, utilities. Lightweight, local, free."
+    },
+    {
+      "id": "05",
+      "name": "ANNEX",
+      "sheet": "A-500",
+      "desc": "Spatial and creative systems: 3D, camera-based scanning, audio-visual, local AI."
+    }
+  ],
+  "systems": [
+    {
+      "key": "onboarding",
+      "no": "101",
+      "zone": "01",
+      "status": "BUILT",
+      "name": "Corporate Auto-Onboarding",
+      "input": "Employee ID, department, M365 email",
+      "verb": "CONFIGURE",
+      "output": "~25 endpoints per run, one packaged process",
+      "note": "One administrator configures a fleet without repetitive manual work. Minimal input, minimal interaction.",
+      "counts": {
+        "endpoints_per_run": 25,
+        "input_fields": 3
+      },
+      "short": "AUTO-ONBOARDING"
+    },
+    {
+      "key": "policy",
+      "no": "102",
+      "zone": "01",
+      "status": "BUILT",
+      "name": "Corporate Auto Policy / Security Automation",
+      "input": "Endpoint policy set",
+      "verb": "APPLY",
+      "output": "USB controls, monitoring, system configuration — bundled, headless",
+      "note": "USB control, Sysmon, Velociraptor and more — one bundled headless agent, applied in seconds.",
+      "short": "POLICY AUTOMATION"
+    },
+    {
+      "key": "assets",
+      "no": "103",
+      "zone": "01",
+      "status": "BUILT",
+      "name": "Asset Management System",
+      "input": "On-prem devices and operational requirements",
+      "verb": "REGISTER",
+      "output": "Asset register with tailored plugins, zero licence cost",
+      "note": "Built from scratch for on-prem environments.",
+      "short": "ASSET REGISTER"
+    },
+    {
+      "key": "ticketing",
+      "no": "104",
+      "zone": "01",
+      "status": "BUILT",
+      "name": "Ticketing System",
+      "input": "Structured ticket intake",
+      "verb": "ROUTE",
+      "output": "Technician context on arrival; events classified into 4 priority tiers; WhatsApp (Twilio) and Telegram notifications via webhooks",
+      "note": "When a ticket arrives, the technician already knows what needs attention.",
+      "short": "TICKETING"
+    },
+    {
+      "key": "ecommerce",
+      "no": "105",
+      "zone": "01",
+      "status": "IN DEV",
+      "name": "E-Commerce Processing System",
+      "input": "High-volume product data",
+      "verb": "PROCESS",
+      "output": "Structured catalogue at bulk throughput",
+      "note": "Designed around very high-volume product processing. Throughput not characterised.",
+      "short": "E-COMMERCE ENGINE"
+    },
+    {
+      "key": "soc",
+      "no": "201",
+      "zone": "02",
+      "status": "BUILT",
+      "name": "SOC / Endpoint Security Platform",
+      "input": "Endpoint telemetry",
+      "verb": "DETECT",
+      "output": "Layered detection, monitoring, response; Tactical RMM across internal and external networks",
+      "note": "Built from first principles. 22 core engines in a layered architecture — Wazuh, Velociraptor, Prometheus, Grafana and Tactical RMM among them.",
+      "counts": {
+        "engines": 22
+      },
+      "short": "SOC PLATFORM · 22 ENGINES"
+    },
+    {
+      "key": "ias",
+      "no": "202",
+      "zone": "02",
+      "status": "BUILT",
+      "name": "IAS — Intrusion Alert System",
+      "input": "Server events",
+      "verb": "ALERT",
+      "output": "Intrusion alerts through an 8-layer architecture",
+      "note": "Eight layers around one server.",
+      "counts": {
+        "layers": 8
+      },
+      "short": "IAS · 8 LAYERS"
+    },
+    {
+      "key": "pdftools",
+      "no": "301",
+      "zone": "03",
+      "status": "BUILT",
+      "name": "Local Document / PDF Tooling",
+      "input": "Employee documents",
+      "verb": "CONVERT",
+      "output": "PDF conversion, editing, watermarking and signing on a local server",
+      "note": "Local-server deployment for ~200 employees. Low-memory stream processing: watermarking, metadata tracing, digital signatures.",
+      "short": "LOCAL PDF TOOLING"
+    },
+    {
+      "key": "agentflow",
+      "no": "302",
+      "zone": "03",
+      "status": "BUILT",
+      "name": "Agent Flow",
+      "input": "Agency documents (OCR)",
+      "verb": "EXTRACT",
+      "output": "Structured Excel for Salesforce migration",
+      "note": "Large volumes of document information to usable data, quickly.",
+      "short": "AGENT FLOW · OCR"
+    },
+    {
+      "key": "cadauto",
+      "no": "303",
+      "zone": "03",
+      "status": "IN DEV",
+      "name": "CAD Drawing Auto-Documentation",
+      "input": "CAD drawings and specifications (precision OCR)",
+      "verb": "DOCUMENT",
+      "output": "Populated structured documentation",
+      "note": "Reads the drawing so nobody has to retype it.",
+      "short": "CAD AUTO-DOC · OCR"
+    },
+    {
+      "key": "amsih",
+      "no": "304",
+      "zone": "03",
+      "status": "BUILT",
+      "name": "AMSIH-one PDF Editor",
+      "input": "PDF",
+      "verb": "EDIT",
+      "output": "Lightweight PDF editing, practical everyday tools",
+      "note": "Intentionally avoids unnecessary bloat.",
+      "short": "AMSIH-ONE PDF"
+    },
+    {
+      "key": "hayascope",
+      "no": "401",
+      "zone": "04",
+      "status": "IN DEV",
+      "name": "HayaScope HyperSync",
+      "input": "Any page, region, window, tab set or URL list",
+      "verb": "STITCH",
+      "output": "Annotated PNG / JPG / PDF (continuous or A4), clipboard, print, email — all processed locally",
+      "note": "Infinite captures. Zero paywalls. The extension UI is never drawn onto the page being captured.",
+      "detail_sheet": "D-501",
+      "short": "HAYASCOPE HYPERSYNC"
+    },
+    {
+      "key": "androidsdk",
+      "no": "402",
+      "zone": "04",
+      "status": "IN DEV",
+      "name": "Android Mobile Browser SDK",
+      "input": "Web",
+      "verb": "BROWSE",
+      "output": "No ads, no bloat, no popups; tracker blocking; anonymous browsing",
+      "note": "Just browse.",
+      "short": "ANDROID BROWSER SDK"
+    },
+    {
+      "key": "themes",
+      "no": "403",
+      "zone": "04",
+      "status": "BUILT",
+      "name": "Browser Extension / Themes",
+      "input": "Working environment",
+      "verb": "QUIET",
+      "output": "Dense astrophotography starfield; calm animated starfield",
+      "note": "Designed to make the working environment quieter, not busier.",
+      "short": "BROWSER THEMES"
+    },
+    {
+      "key": "renata",
+      "no": "404",
+      "zone": "04",
+      "status": "IN TEST",
+      "name": "Renata Code",
+      "input": "PHP, Python, HTML source",
+      "verb": "PREVIEW",
+      "output": "Live rendered output beside the code",
+      "note": "Code and result, side by side.",
+      "short": "RENATA CODE"
+    },
+    {
+      "key": "hayasnap",
+      "no": "405",
+      "zone": "04",
+      "status": "BUILT",
+      "name": "HayaSnap Pro",
+      "input": "Screen",
+      "verb": "CAPTURE",
+      "output": "Capture utility",
+      "note": "",
+      "short": "HAYASNAP PRO"
+    },
+    {
+      "key": "omz",
+      "no": "406",
+      "zone": "04",
+      "status": "BUILT",
+      "name": "OMZ — Open My Zip",
+      "input": "Archive",
+      "verb": "OPEN",
+      "output": "Archive utility",
+      "note": "",
+      "short": "OMZ · OPEN MY ZIP"
+    },
+    {
+      "key": "stayawake",
+      "no": "407",
+      "zone": "04",
+      "status": "BUILT",
+      "name": "StayAwake",
+      "input": "System sleep policy",
+      "verb": "HOLD",
+      "output": "Advanced alternative to simple keep-awake utilities",
+      "note": "",
+      "short": "STAYAWAKE"
+    },
+    {
+      "key": "kubos",
+      "no": "408",
+      "zone": "04",
+      "status": "BUILT",
+      "name": "KUBOS Workspace Cube",
+      "input": "Workspace",
+      "verb": "ARRANGE",
+      "output": "Workspace utility",
+      "note": "",
+      "short": "KUBOS WORKSPACE"
+    },
+    {
+      "key": "immersive3d",
+      "no": "501",
+      "zone": "05",
+      "status": "BUILT",
+      "name": "Immersive 3D Website",
+      "input": "Scroll position",
+      "verb": "DRIVE",
+      "output": "Camera path through a lit WebGL scene; GLTF/GLB, Draco, rAF-optimised",
+      "note": "Three.js, custom render loops, lerp-bound camera movement, Node.js backend, responsive canvas.",
+      "short": "IMMERSIVE 3D WEB"
+    },
+    {
+      "key": "towergarden",
+      "no": "502",
+      "zone": "05",
+      "status": "IN DEV",
+      "name": "Haya-Tower-Garden",
+      "input": "Real-estate model",
+      "verb": "WALK",
+      "output": "Immersive 3D real-estate experience",
+      "note": "",
+      "short": "HAYA-TOWER-GARDEN"
+    },
+    {
+      "key": "yolo3d",
+      "no": "503",
+      "zone": "05",
+      "status": "IN DEV",
+      "name": "YOLO 3D Scanning",
+      "input": "Camera feed",
+      "verb": "COUNT",
+      "output": "Warehouse / product inventory check via 3D scanning",
+      "note": "",
+      "short": "YOLO 3D SCANNING"
+    },
+    {
+      "key": "opus",
+      "no": "504",
+      "zone": "05",
+      "status": "IN DEV",
+      "name": "Project Opus",
+      "input": "Audio (tune, pitch)",
+      "verb": "MATCH",
+      "output": "Rhythm visualisation with automatic asset matching",
+      "note": "",
+      "short": "PROJECT OPUS"
+    },
+    {
+      "key": "localrag",
+      "no": "505",
+      "zone": "05",
+      "status": "BUILT",
+      "name": "Local RAG / AI Agent Orchestration",
+      "input": "Local corpus and agent tasks",
+      "verb": "ORCHESTRATE",
+      "output": "Real-time agent orchestration behind a WebGL 3D interface",
+      "note": "Local, low-level-optimised RAG architecture.",
+      "short": "LOCAL RAG · AGENTS"
+    },
+    {
+      "key": "aitrain",
+      "no": "506",
+      "zone": "05",
+      "status": "IN TEST",
+      "name": "AI Training / Optimisation Mechanics",
+      "input": "Generated synthetic training data",
+      "verb": "ITERATE",
+      "output": "Automated feedback loops for downstream model behaviour",
+      "note": "Focus: speed, accuracy, efficiency. Results not characterised.",
+      "short": "AI TRAINING LOOPS"
+    },
+    {
+      "key": "watchface",
+      "no": "507",
+      "zone": "05",
+      "status": "BUILT",
+      "name": "Huawei Watch Face",
+      "input": "Time",
+      "verb": "SHOW",
+      "output": "Custom watch face",
+      "note": "",
+      "short": "WATCH FACE"
+    }
+  ],
+  "general_notes": [
+    "THIS SET RECORDS SYSTEMS AS BUILT. WORK IN PROGRESS IS CLOUDED.",
+    "ALL TOOLS TO BE LIGHTWEIGHT, LOCAL AND FREE UNLESS NOTED OTHERWISE.",
+    "WHERE A REQUIRED TOOL DID NOT EXIST, IT WAS BUILT.",
+    "SECURITY IS DRAWN IN LAYERS. EVERY BOUNDARY IS A CHECKPOINT.",
+    "ONE OPERATOR SHALL BE SUFFICIENT TO CONFIGURE MANY SYSTEMS.",
+    "TOOL INTERFACES SHALL NOT BE DRAWN ONTO THE WORK THEY ACT UPON.",
+    "QUANTITIES SHOWN ARE COUNTS. NO DIMENSION IS TO BE SCALED.",
+    "REFER TO SCHEDULE S-001 FOR STATUS OF ALL SYSTEMS."
+  ]
+}

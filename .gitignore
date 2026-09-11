@@ -1,0 +1,24 @@
+# Local working context — never published with the profile
+CLAUDE.md
+.claude/
+reference/
+
+# Licensed lettering face — Envato Elements licence forbids redistribution of
+# the binaries. Only the outlined SVG sheets ship; the font stays local.
+tools/asbuilt/fonts/*.otf
+tools/asbuilt/fonts/*.ttf
+tools/asbuilt/fonts/*.woff
+tools/asbuilt/fonts/*.woff2
+tools/asbuilt/fonts/*.pdf
+
+# Build artefacts
+__pycache__/
+*.pyc
+.venv/
+tools/asbuilt/_preview/
+*.png.tmp
+.DS_Store
+
+# console
+tools/console/_preview/
+archive/

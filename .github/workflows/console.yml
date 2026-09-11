@@ -1,0 +1,62 @@
+name: console
+
+# Refreshes the telemetry card and regenerates the console daily at 04:04 UTC.
+on:
+  schedule:
+    - cron: "4 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/**"
+      - ".github/workflows/console.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: console
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install --quiet fonttools
+
+      - name: Restore lettering faces
+        # FONT_BUNDLE_B64 is a base64-encoded tar.gz of the four licensed .otf files.
+        # The fonts are never committed; the licence does not permit redistribution.
+        env:
+          FONT_BUNDLE_B64: ${{ secrets.FONT_BUNDLE_B64 }}
+        run: |
+          if [ -z "$FONT_BUNDLE_B64" ]; then
+            echo "::error::FONT_BUNDLE_B64 secret is missing — refusing to build with a stand-in face."
+            exit 1
+          fi
+          echo "$FONT_BUNDLE_B64" | base64 -d | tar -xz -C tools/asbuilt/fonts/
+          ls tools/asbuilt/fonts/*.otf
+
+      - name: Sync telemetry and build
+        env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
+        run: python3 tools/console/build.py --sync
+
+      - name: Commit
+        run: |
+          git config user.name  "Mohamed Absaar"
+          git config user.email "absaarit@gmail.com"
+          git add assets/console tools/console/data/telemetry.json README.md
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "console: telemetry sync $(date -u +%Y-%m-%d)"
+            git push
+          fi

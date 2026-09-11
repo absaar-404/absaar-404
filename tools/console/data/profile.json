@@ -1,0 +1,408 @@
+{
+  "handle": "absaar-404",
+  "name": "ABSAAR IT",
+  "role": "PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+  "site": "absaar.dev",
+  "cluster": "NEBULA CORE CLUSTER",
+  "sector": "ROOT SECTOR",
+  "punchline": "STATUS 404  ·  BORN 04.04  ·  NOT FOUND: LICENCE FEES.",
+  "statement": "Building secure infrastructure, automating operations, and engineering resilient enterprise environments.",
+  "rule": "Day-to-day tools should not cost money. Compress, unzip, capture, edit, browse — companies charge for the basics. I build them, keep them light, and keep them free.",
+  "operator": [
+    [
+      "CURRENT FOCUS",
+      "Automated baseline infrastructure orchestration models."
+    ],
+    [
+      "OPEN TO COLLABORATE",
+      "Multi-cloud DevSecOps frameworks · open-source security automation · offensive security research · advanced DevOps pipelines."
+    ],
+    [
+      "SEEKING INPUT ON",
+      "Kubernetes hardening at scale · red-team persistent-threat simulation · container runtime hardening."
+    ],
+    [
+      "LEARNING",
+      "Cloud-native development on OpenShift · advanced C++ systems programming · AI-driven SOC automation · next-generation AI-agent infrastructure automation."
+    ],
+    [
+      "ASK ME ABOUT",
+      "PowerShell automation · Active Directory · Group Policy · cloud infrastructure perimeters."
+    ]
+  ],
+  "domains": [
+    "Cloud Architecture",
+    "Enterprise Infrastructure",
+    "Cybersecurity Engineering",
+    "Linux Administration",
+    "Docker & Kubernetes",
+    "Infrastructure Automation",
+    "Identity & Access Management",
+    "Network Security",
+    "SIEM & XDR",
+    "Incident Response",
+    "Performance Optimization",
+    "Disaster Recovery",
+    "Cloud Security",
+    "Enterprise Monitoring",
+    "Container Platforms",
+    "Zero Trust Architecture",
+    "Threat Detection & Response",
+    "Continuous Learning"
+  ],
+  "stack": {
+    "LANGUAGES": [
+      "Python",
+      "PowerShell",
+      "Bash",
+      "TypeScript",
+      "JavaScript",
+      "Rust",
+      "C",
+      "C++",
+      "C#",
+      "Java",
+      "Kotlin",
+      "Objective-C",
+      "PHP",
+      "Perl",
+      "AssemblyScript"
+    ],
+    "CLOUD & EDGE": [
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Oracle Cloud",
+      "Alibaba Cloud",
+      "OpenStack",
+      "Cloudflare",
+      "Vercel",
+      "Netlify",
+      "Firebase",
+      "Supabase"
+    ],
+    "PLATFORM · IAC · CI/CD": [
+      "Kubernetes",
+      "Docker",
+      "Ansible",
+      "Nginx",
+      "Apache",
+      "Tomcat",
+      "Gunicorn",
+      "GitHub Actions",
+      "GitLab CI",
+      "Jenkins",
+      "Fastlane",
+      "Gradle",
+      "Maven",
+      "CMake",
+      "Git",
+      "Bitbucket",
+      "Subversion"
+    ],
+    "SECURITY · OBSERVABILITY": [
+      "Wazuh",
+      "Velociraptor",
+      "Tactical RMM",
+      "Sysmon",
+      "Prometheus",
+      "Grafana",
+      "OpenTelemetry",
+      "ElasticSearch",
+      "Sentry",
+      "WireGuard",
+      "Pi-hole",
+      "Bitwarden",
+      "JWT"
+    ],
+    "DATA & MESSAGING": [
+      "PostgreSQL",
+      "MySQL",
+      "MariaDB",
+      "SQL Server",
+      "SQLite",
+      "MongoDB",
+      "ArangoDB",
+      "CrateDB",
+      "SurrealDB",
+      "PlanetScale",
+      "Teradata",
+      "PocketBase",
+      "Prisma",
+      "Kafka",
+      "Spark",
+      "Flink",
+      "Airflow",
+      "Hadoop",
+      "Hive"
+    ],
+    "WEB & APP": [
+      "Node.js",
+      "Next.js",
+      "NestJS",
+      "Express",
+      "Vue",
+      "Angular",
+      "Alpine.js",
+      "Tailwind",
+      "Bootstrap",
+      "Laravel",
+      "Symfony",
+      "Phoenix",
+      ".NET",
+      "WordPress",
+      "Expo",
+      "Node-RED",
+      "Three.js",
+      "WebGL",
+      "OpenGL"
+    ],
+    "AI / ML": [
+      "PyTorch",
+      "TensorFlow",
+      "NumPy",
+      "SciPy",
+      "Pandas",
+      "Anaconda",
+      "mlflow",
+      "YOLO",
+      "Local RAG"
+    ],
+    "TESTING & QUALITY": [
+      "Playwright",
+      "Cypress",
+      "Vitest",
+      "Mocha",
+      "Testing Library",
+      "Codecov",
+      "Postman",
+      "OpenAPI"
+    ],
+    "HARDWARE & TOOLING": [
+      "Raspberry Pi",
+      "Arduino",
+      "PlatformIO",
+      "Zigbee",
+      "FFmpeg",
+      "Windows Terminal",
+      "XFCE",
+      "Power BI",
+      "Notion",
+      "Jira"
+    ],
+    "DESIGN": [
+      "Figma",
+      "Illustrator",
+      "Photoshop",
+      "GIMP",
+      "Rhinoceros"
+    ]
+  },
+  "featured": [
+    "onboarding",
+    "soc",
+    "hayascope",
+    "agentflow"
+  ],
+  "links": [
+    [
+      "absaar.dev",
+      "https://absaar.dev"
+    ],
+    [
+      "github.com/absaar-404",
+      "https://github.com/absaar-404"
+    ]
+  ],
+  "brief": {
+    "mission": "Designing Zero-Trust network architectures and automated compliance pipelines at AHS Properties, supporting more than 300 enterprise users across Dubai.",
+    "employer": "AHS PROPERTIES",
+    "location": "DUBAI · UAE",
+    "users": "300+",
+    "collaboration": [
+      "Multi-cloud DevSecOps",
+      "Security automation",
+      "Offensive security research",
+      "Infrastructure security",
+      "Open source projects"
+    ],
+    "learning": [
+      "OpenShift",
+      "Kubernetes hardening",
+      "AI-powered SOC automation",
+      "Advanced C++ systems programming",
+      "Cloud-native security"
+    ],
+    "expertise": [
+      "Active Directory security",
+      "Microsoft Defender",
+      "PowerShell automation",
+      "Enterprise Windows security",
+      "CEH methodologies",
+      "Cybersecurity career guidance",
+      "Infrastructure automation"
+    ],
+    "journey": "Completed a Bachelor's degree through lateral entry while working full-time in enterprise IT — theory and production, in parallel.",
+    "timeline": [
+      [
+        "IT SUPPORT",
+        "Full-time enterprise support; scripting away repeat incidents"
+      ],
+      [
+        "B.SC COMPUTER SCIENCE",
+        "Lateral entry, completed while working full-time"
+      ],
+      [
+        "ENTERPRISE IT & INFRASTRUCTURE",
+        "Windows, AD, GPO, cloud perimeters, automation"
+      ],
+      [
+        "PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+        "Zero-trust architecture and compliance pipelines, 300+ users, Dubai"
+      ]
+    ],
+    "ecosystem": [
+      [
+        "IDENTITY",
+        "blue",
+        [
+          "Active Directory",
+          "Entra ID / M365",
+          "Group Policy",
+          "IAM"
+        ]
+      ],
+      [
+        "CLOUD",
+        "cyan",
+        [
+          "AWS",
+          "Azure",
+          "Oracle Cloud",
+          "Google Cloud"
+        ]
+      ],
+      [
+        "INFRASTRUCTURE",
+        "teal",
+        [
+          "Linux",
+          "Windows Server",
+          "Bare metal",
+          "Networking"
+        ]
+      ],
+      [
+        "AUTOMATION",
+        "warn",
+        [
+          "PowerShell",
+          "Python",
+          "Ansible",
+          "Bash"
+        ]
+      ],
+      [
+        "CONTAINERS",
+        "purple",
+        [
+          "Docker",
+          "Kubernetes",
+          "OpenShift"
+        ]
+      ],
+      [
+        "SECURITY",
+        "red",
+        [
+          "Wazuh",
+          "Velociraptor",
+          "Defender",
+          "IAS · Sysmon"
+        ]
+      ],
+      [
+        "MONITORING",
+        "ok",
+        [
+          "Prometheus",
+          "Grafana",
+          "OpenTelemetry",
+          "Elastic"
+        ]
+      ],
+      [
+        "COMPLIANCE",
+        "gold",
+        [
+          "Baseline pipelines",
+          "Policy bundles",
+          "Zero trust"
+        ]
+      ],
+      [
+        "AI",
+        "magenta",
+        [
+          "Local RAG",
+          "PyTorch",
+          "SOC automation"
+        ]
+      ]
+    ],
+    "threat_classes": [
+      [
+        "CRITICAL",
+        "red",
+        "UNAUTHORISED USB MASS STORAGE",
+        "BLOCKED · POLICY 102"
+      ],
+      [
+        "HIGH",
+        "warn",
+        "PRIVILEGE ESCALATION PATTERN",
+        "HUNT · VELOCIRAPTOR"
+      ],
+      [
+        "HIGH",
+        "warn",
+        "LATERAL MOVEMENT · SMB",
+        "DETECT · WAZUH"
+      ],
+      [
+        "MEDIUM",
+        "gold",
+        "BRUTE-FORCE AUTHENTICATION",
+        "ALERT · IAS LAYER 3"
+      ],
+      [
+        "MEDIUM",
+        "gold",
+        "SUSPICIOUS POWERSHELL EXECUTION",
+        "SYSMON · RULESET"
+      ],
+      [
+        "LOW",
+        "blue",
+        "BASELINE CONFIGURATION DRIFT",
+        "REMEDIATE · AUTOMATION"
+      ],
+      [
+        "INFO",
+        "ok",
+        "CERTIFICATE EXPIRY WINDOW",
+        "SCHEDULED · RENEWAL"
+      ]
+    ],
+    "boot": [
+      "absaar-os v0404 · initialising control plane",
+      "loading identity ............ ABSAAR IT",
+      "role ......................... PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+      "mounting /zero-trust ......... OK",
+      "starting soc-engines[22] ..... OK",
+      "arming ias-layers[8] ......... OK",
+      "syncing github telemetry ..... OK",
+      "boot complete · welcome"
+    ]
+  }
+}
