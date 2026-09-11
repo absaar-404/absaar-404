@@ -1,7 +1,7 @@
 {
   "handle": "absaar-404",
   "name": "ABSAAR IT",
-  "role": "PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+  "role": "PRINCIPAL SOFTWARE ARCHITECT & INFRA DEVOPS",
   "site": "absaar.dev",
   "cluster": "NEBULA CORE CLUSTER",
   "sector": "ROOT SECTOR",
@@ -242,22 +242,18 @@
       "Cybersecurity career guidance",
       "Infrastructure automation"
     ],
-    "journey": "Completed a Bachelor's degree through lateral entry while working full-time in enterprise IT — theory and production, in parallel.",
+    "journey": "From enterprise IT operations to architecture: every repeat task became a script, every script became a system.",
     "timeline": [
       [
-        "IT SUPPORT",
-        "Full-time enterprise support; scripting away repeat incidents"
-      ],
-      [
-        "B.SC COMPUTER SCIENCE",
-        "Lateral entry, completed while working full-time"
+        "IT DEVOPS",
+        "Enterprise operations; scripting away repeat incidents, automating the baseline"
       ],
       [
         "ENTERPRISE IT & INFRASTRUCTURE",
-        "Windows, AD, GPO, cloud perimeters, automation"
+        "Windows, AD, GPO, cloud perimeters, security automation"
       ],
       [
-        "PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+        "PRINCIPAL SOFTWARE ARCHITECT & INFRA DEVOPS",
         "Zero-trust architecture and compliance pipelines, 300+ users, Dubai"
       ]
     ],
@@ -397,7 +393,7 @@
     "boot": [
       "absaar-os v0404 · initialising control plane",
       "loading identity ............ ABSAAR IT",
-      "role ......................... PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT",
+      "role ......................... PRINCIPAL SOFTWARE ARCHITECT & INFRA DEVOPS",
       "mounting /zero-trust ......... OK",
       "starting soc-engines[22] ..... OK",
       "arming ias-layers[8] ......... OK",

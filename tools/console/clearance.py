@@ -236,7 +236,7 @@ def auth(f: Fonts, data: dict) -> Card:
     # checks
     kx, ky = 840, 156
     c.panel(kx, ky, 888, 340, "VERIFICATION SEQUENCE")
-    checks = [("IDENTITY", "GitHub handle matches profile owner"), ("ROLE", "Principal DevSecOps & Systems Architect"),
+    checks = [("IDENTITY", "GitHub handle matches profile owner"), ("ROLE", "Principal Software Architect & Infra DevOps"),
               ("MISSION", f"{brief['employer']} · {brief['users']} users · Dubai"), ("SYSTEMS", "26 systems on record · 17 operational"),
               ("POSTURE", "Zero trust · every edge is a checkpoint"), ("ACCESS", "Granted · continue to briefing")]
     for i, (k, v) in enumerate(checks):
@@ -284,7 +284,7 @@ def mission(f: Fonts, data: dict) -> Card:
     c.mono(f"{brief['employer']}   ·   {brief['location']}", 1224, 434, 11.5, P.text, tracking=0.16, medium=True)
     for i, ln in enumerate(c.wrap(f.mono, profile["statement"].upper(), 9.5, 460, 0.08)[:2]):
         c.mono(ln, 1224, 460 + i * 16, 9.5, P.dim, tracking=0.08)
-    c.footer("BRIEFING ACKNOWLEDGED  ·  NEXT: CURRENT OPERATIONS", "ROLE  PRINCIPAL DEVSECOPS & SYSTEMS ARCHITECT")
+    c.footer("BRIEFING ACKNOWLEDGED  ·  NEXT: CURRENT OPERATIONS", "ROLE  PRINCIPAL SOFTWARE ARCHITECT & INFRA DEVOPS")
     return c
 
 

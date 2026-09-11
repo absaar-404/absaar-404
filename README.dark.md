@@ -48,5 +48,5 @@
 <sub>Confidential work is not listed. Figures that have not been characterised are not shown.</sub>
 </details>
 
-<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL DEVSECOPS &amp; SYSTEMS ARCHITECT &nbsp;·&nbsp; <a href="https://absaar.dev">absaar.dev</a> &nbsp;·&nbsp; github.com/absaar-404<br>
+<p align="center"><sub><b>ABSAAR IT</b> &nbsp;·&nbsp; PRINCIPAL SOFTWARE ARCHITECT &amp; INFRA DEVOPS &nbsp;·&nbsp; <a href="https://absaar.dev">absaar.dev</a> &nbsp;·&nbsp; github.com/absaar-404<br>
 Cards are generated from <code>tools/console</code>; telemetry refreshes daily. Where a required tool did not exist, it was built.</sub></p>
