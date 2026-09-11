@@ -56,7 +56,7 @@ jobs:
         run: |
           git config user.name  "Mohamed Absaar"
           git config user.email "absaarit@gmail.com"
-          git add assets/console tools/console/data/telemetry.json README.md
+          git add assets/console assets/clearance tools/console/data/telemetry.json README.md README.dark.md
           if git diff --cached --quiet; then
             echo "no changes"
           else
