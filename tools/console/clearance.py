@@ -78,13 +78,77 @@ def _torus_frames(n: int = 24, cols: int = 48, rows: int = 22) -> list[list[str]
     return frames
 
 
+ASCII_DIR = __import__("pathlib").Path(__file__).resolve().parent / "data" / "ascii"
+
+
+def _image_frames(path, cols: int = 60, rows: int = 26, n: int = 16) -> list[list[str]]:
+    """Turn any picture into ASCII frames with a band of light sweeping across it.
+    Drop a PNG/JPG at tools/console/data/ascii/source.* and it replaces the torus.
+    Dark or transparent background becomes empty space; the subject is cropped
+    to its bounding box first so it fills the frame."""
+    from PIL import Image, ImageOps
+    img = Image.open(path).convert("RGBA")
+    # flatten transparency onto black, then to luminance
+    bg = Image.new("RGBA", img.size, (0, 0, 0, 255))
+    img = Image.alpha_composite(bg, img).convert("L")
+    # crop to the subject: anything brighter than the floor
+    mask = img.point(lambda v: 255 if v > 40 else 0)
+    box = mask.getbbox()
+    if box:
+        img = img.crop(box)
+    img = ImageOps.autocontrast(img, cutoff=1)
+    iw, ih = img.size
+    scale = min(cols / iw, (rows * 2) / ih)
+    tw, th = max(1, int(iw * scale)), max(1, int(ih * scale / 2))
+    img = img.resize((tw, th), Image.LANCZOS)
+    px = img.load()
+    ramp = " .:-=+*#%@"
+    frames = []
+    for k in range(n):
+        band = -0.3 + 1.6 * k / n            # band centre sweeps left to right
+        out = []
+        for yy in range(th):
+            row = []
+            for xx in range(tw):
+                v = px[xx, yy] / 255.0
+                if v < 0.12:
+                    row.append(" ")           # background stays empty
+                    continue
+                d = abs(xx / tw - band)
+                v = min(1.0, v + max(0.0, 0.22 - d) * 1.6)
+                row.append(ramp[int(v * (len(ramp) - 1))])
+            out.append("".join(row).rstrip())
+        frames.append(out)
+    return frames
+
+
+def _text_frames() -> list[list[str]] | None:
+    """User-drawn frames: tools/console/data/ascii/frame-01.txt, frame-02.txt ...
+    Each file is one frame; all frames should have the same width."""
+    files = sorted(ASCII_DIR.glob("frame-*.txt"))
+    if not files:
+        return None
+    return [f.read_text(encoding="utf-8").rstrip("\n").split("\n") for f in files]
+
+
+def _pick_frames() -> tuple[list[list[str]], str]:
+    tf = _text_frames()
+    if tf:
+        return tf, f"CUSTOM · {len(tf)} FRAMES"
+    for ext in ("png", "jpg", "jpeg", "gif", "webp"):
+        src = ASCII_DIR / f"source.{ext}"
+        if src.exists():
+            return _image_frames(src), "FROM IMAGE · LIGHT SWEEP"
+    return _torus_frames(), "PROCEDURAL · 24 FRAMES · NO IMAGES"
+
+
 def _ascii_animation(c: Card, x: float, y: float, w: float, h: float, color: str, cycle: float = 3.6) -> None:
     """Frame-flip ASCII animation using system monospace text (any monospace
     aligns identically, so this is the one place plain <text> is acceptable)."""
-    frames = _torus_frames()
+    frames, _ = _pick_frames()
     n = len(frames)
-    rows = len(frames[0])
-    cols = 48
+    rows = max(len(fr) for fr in frames)
+    cols = max(len(line) for fr in frames for line in fr) or 48
     fs = min(h / (rows * 1.05), w / (cols * 0.62))
     lh = fs * 1.05
     for i, fr in enumerate(frames):
@@ -127,7 +191,7 @@ def boot(f: Fonts, data: dict) -> Card:
     ax, ay, aw, ah = 1150, 156, 578, 470
     c.panel(ax, ay, aw, ah, "RENDER · ASCII CORE")
     _ascii_animation(c, ax + 40, ay + 60, aw - 80, ah - 120, P.blue)
-    c.mono("PROCEDURAL · 24 FRAMES · NO IMAGES", ax + aw / 2, ay + ah - 20, 9.5, P.dim, anchor="middle", tracking=0.2)
+    c.mono(_pick_frames()[1], ax + aw / 2, ay + ah - 20, 9.5, P.dim, anchor="middle", tracking=0.2)
 
     c.logo(72, 652, 48)
     c.display(profile["name"], 136, 690, 30, P.text)
@@ -309,7 +373,7 @@ def ecosystem(f: Fonts, data: dict) -> Card:
     brief = data["profile"]["brief"]
     eco = brief["ecosystem"]
     c = Card(f, 640, "Technology ecosystem", "Nine connected layers from identity to AI, each a coloured node with the "
-             "tools beneath it; packets travel the chain.", code="SEQ · 09", heading="CLOUD & TECHNOLOGY ECOSYSTEM",
+             "tools beneath it; packets travel the chain.", code="SEQ · 10", heading="CLOUD & TECHNOLOGY ECOSYSTEM",
              status=(f"{len(eco)} LAYERS CONNECTED", P.cyan), accent=P.cyan)
     d = c.doc
     n = len(eco)
@@ -388,7 +452,7 @@ def vault(f: Fonts, data: dict) -> Card:
 def timeline(f: Fonts, data: dict) -> Card:
     systems, brief = data["systems"], data["profile"]["brief"]
     c = Card(f, 690, "Mission timeline and innovation lab", "Career stages on a travelling timeline, and the spatial and AI "
-             "experiments in the lab.", code="SEQ · 10", heading="MISSION TIMELINE  ·  INNOVATION LAB",
+             "experiments in the lab.", code="SEQ · 11", heading="MISSION TIMELINE  ·  INNOVATION LAB",
              status=("IN MOTION", P.teal), accent=P.teal)
     d = c.doc
     stages = brief["timeline"]
@@ -438,7 +502,7 @@ def timeline(f: Fonts, data: dict) -> Card:
 def comms(f: Fonts, data: dict) -> Card:
     profile, brief = data["profile"], data["profile"]["brief"]
     c = Card(f, 420, "Communication terminal", "Contact terminal: website and GitHub, with a blinking prompt.",
-             code="SEQ · 12", heading="COMMUNICATION TERMINAL", status=("CHANNEL OPEN", P.ok), accent=P.text)
+             code="SEQ · 13", heading="COMMUNICATION TERMINAL", status=("CHANNEL OPEN", P.ok), accent=P.text)
     d = c.doc
     tx, ty, tw, th = 72, 150, 1656, 190
     c.panel(tx, ty, tw, th)
@@ -464,6 +528,113 @@ def _tinted(fn, accent_name: str):
     return make
 
 
+
+
+# ================================================== 07 · ENTERPRISE NETWORK
+def network(f: Fonts, data: dict) -> Card:
+    brief = data["profile"]["brief"]
+    c = Card(f, 820, "Enterprise network — site-to-site architecture",
+             "Two sites joined by an encrypted site-to-site tunnel, each with an edge firewall, core switch and "
+             "segmented VLANs behind zero-trust checkpoints; hybrid cloud above; SOC telemetry from both sites.",
+             code="SEQ · 07", heading="ENTERPRISE NETWORK — SITE-TO-SITE ARCHITECTURE",
+             status=("TUNNEL UP · ENCRYPTED", P.ok), accent=P.teal)
+    d = c.doc
+    T, I = P.teal, P.blue
+
+    def box(x, y, w, h, title, sub="", col=T, led=True, r=8):
+        d.rect(x, y, w, h, fill="#FFFFFF", stroke=col, width=1.6, rx=r, filter="url(#shadow)")
+        d.rect(x, y, 5, h, fill=col, rx=2)
+        c.mono(title, x + 18, y + 24, 11, P.text, tracking=0.16, medium=True)
+        if sub:
+            c.mono(sub, x + 18, y + 42, 9.5, P.muted, tracking=0.08)
+        if led:
+            c.led(x + w - 16, y + 16, P.ok, r=3)
+
+    def link(x1, y1, x2, y2, col=P.line, w=1.5, dash=None, pk=True, dur=2.0, begin=0.0):
+        d.line(x1, y1, x2, y2, stroke=col, width=w, stroke_dasharray=dash)
+        if pk:
+            c.packet(x1, y1, x2, y2, dur, color=T, r=3, begin=begin)
+
+    # ---- cloud band
+    cx0, cy0, cw, ch = 560, 150, 680, 64
+    d.rect(cx0, cy0, cw, ch, fill="#FFFFFF", stroke=I, width=1.6, rx=32, filter="url(#shadow)")
+    c.mono("HYBRID CLOUD", cx0 + 28, cy0 + 28, 11, I, tracking=0.22, medium=True)
+    c.mono("AWS  ·  AZURE  ·  ORACLE CLOUD  ·  GOOGLE CLOUD  —  IDENTITY-FEDERATED, PRIVATE ENDPOINTS", cx0 + 28, cy0 + 47, 9.5, P.muted, tracking=0.08)
+    c.led(cx0 + cw - 30, cy0 + 32, P.ok, r=4)
+
+    # ---- sites
+    sites = [
+        (72, "SITE A", f"DUBAI HQ  ·  {brief['users']} USERS", True),
+        (980, "SITE B", "REMOTE SITE  ·  BRANCH / DR", False),
+    ]
+    for sx, name, sub, hq in sites:
+        sw = 748
+        d.rect(sx, 250, sw, 470, fill=P.panel2, stroke=P.line, width=1, rx=14, fill_opacity=0.6)
+        c.mono(name, sx + 22, 282, 13, P.text, tracking=0.24, medium=True)
+        c.mono(sub, sx + 22, 302, 10, P.muted, tracking=0.12)
+        # edge firewall
+        fx, fy = sx + 40, 330
+        box(fx, fy, 250, 58, "NGFW  ·  EDGE FIREWALL", "FORTINET · IPS · WEB FILTER · SSL INSPECTION", col=P.red)
+        # core switch
+        kx, ky = sx + 40, 420
+        box(kx, ky, 250, 58, "CORE SWITCH  ·  L3", "VLAN ROUTING · ACL · 802.1X", col=T)
+        link(fx + 125, fy + 58, kx + 125, ky, dur=1.4)
+        # identity / DC
+        ix_, iy_ = sx + 330, 330
+        if hq:
+            box(ix_, iy_, 380, 58, "IDENTITY  ·  ACTIVE DIRECTORY / ENTRA ID", "GPO · MFA · CONDITIONAL ACCESS · PRIVILEGED ACCESS", col=I)
+            box(ix_, 420, 380, 58, "DATA CENTRE  ·  SERVERS", "FILE · APPS · VIRTUALISATION · BACKUP", col=T)
+            box(ix_, 510, 380, 58, "SOC  ·  22 ENGINES", "WAZUH · VELOCIRAPTOR · SYSMON · TACTICAL RMM", col=P.purple)
+            link(kx + 250, ky + 29, ix_, ky + 29, dur=1.8)
+            link(ix_ + 190, iy_ + 58, ix_ + 190, 420, pk=False)
+            link(ix_ + 190, 478, ix_ + 190, 510, pk=False)
+        else:
+            box(ix_, iy_, 380, 58, "IDENTITY  ·  READ-ONLY DOMAIN CONTROLLER", "CACHED CREDENTIALS · LOCAL AUTH · SYNCED POLICY", col=I)
+            box(ix_, 420, 380, 58, "DR REPLICA  ·  SERVERS", "REPLICATED DATA · FAILOVER · BACKUP", col=T)
+            box(ix_, 510, 380, 58, "SOC AGENTS  ·  TELEMETRY FORWARDING", "ENDPOINT AGENTS → SITE A SOC OVER THE TUNNEL", col=P.purple)
+            link(kx + 250, ky + 29, ix_, ky + 29, dur=1.8)
+            link(ix_ + 190, iy_ + 58, ix_ + 190, 420, pk=False)
+            link(ix_ + 190, 478, ix_ + 190, 510, pk=False)
+        # segments
+        segs = [("USERS", P.ok), ("SERVERS", T), ("OT / IOT", P.warn), ("GUEST", P.dim)] if hq else [("USERS", P.ok), ("SERVERS", T), ("GUEST", P.dim)]
+        segw = 250 / len(segs) - 8
+        for i, (nm, col) in enumerate(segs):
+            gx = sx + 40 + i * (segw + 8)
+            gy = 600
+            d.rect(gx, gy, segw, 88, fill="#FFFFFF", stroke=col, width=1.4, rx=8)
+            c.mono(nm, gx + segw / 2, gy + 30, 9.5, P.text, anchor="middle", tracking=0.14, medium=True)
+            c.mono("VLAN", gx + segw / 2, gy + 48, 9, P.dim, anchor="middle", tracking=0.2)
+            # checkpoint at the segment boundary
+            d.circle(gx + segw / 2, gy, 6, fill="#FFFFFF", stroke=col, width=1.6)
+            d.line(gx + segw / 2, ky + 58, gx + segw / 2, gy - 6, stroke=P.line, width=1.2)
+            c.packet(gx + segw / 2, ky + 58, gx + segw / 2, gy - 6, 1.6 + i * 0.3, color=col, r=2.4, begin=i * 0.4)
+            c.led(gx + segw / 2, gy + 70, col, r=2.5, dur=2 + i * 0.4)
+        c.mono("EVERY SEGMENT BOUNDARY IS A CHECKPOINT  ·  EAST-WEST INSPECTED", sx + 40, 708, 9.5, P.muted, tracking=0.1)
+        # cloud link from firewall
+        d.line(fx + 125, fy, fx + 125, cy0 + ch, stroke=I, width=1.2, stroke_dasharray="6 5", stroke_opacity=0.6) if not hq else None
+        d.line(fx + 125, fy, fx + 125, cy0 + ch, stroke=I, width=1.2, stroke_dasharray="6 5", stroke_opacity=0.6) if hq else None
+        c.packet(fx + 125, cy0 + ch, fx + 125, fy, 2.6, color=I, r=2.6, begin=0.8 if hq else 1.9)
+
+    # ---- tunnel between the two edge firewalls
+    ax, ay = 72 + 40 + 250, 359          # site A firewall right edge
+    bx = 980 + 40                         # site B firewall left edge
+    d.line(ax, ay - 6, bx, ay - 6, stroke=T, width=2)
+    d.line(ax, ay + 6, bx, ay + 6, stroke=T, width=2)
+    d.rect(ax, ay - 6, bx - ax, 12, fill=T, fill_opacity=0.08)
+    c.packet(ax, ay - 6, bx, ay - 6, 1.8, color=T, r=3.2)
+    c.packet(bx, ay + 6, ax, ay + 6, 1.8, color=T, r=3.2, begin=0.9)
+    mx = (ax + bx) / 2
+    d.rect(mx - 118, ay - 34, 236, 26, fill="#FFFFFF", stroke=T, width=1.2, rx=13)
+    # lock glyph
+    d.rect(mx - 104, ay - 25, 10, 8, fill="none", stroke=T, width=1.4, rx=1.5)
+    d.path(f"M{mx-102},{ay-25} v-3 a3,3 0 0 1 6,0 v3", fill="none", stroke=T, width=1.4)
+    c.mono("SITE-TO-SITE VPN  ·  WIREGUARD / IPSEC", mx + 4, ay - 16, 9.5, T, anchor="middle", tracking=0.14, medium=True)
+    c.mono("WAN  ·  ENCRYPTED  ·  MUTUAL AUTH  ·  IDENTITY BEFORE ROUTE", mx, ay + 34, 9.5, P.muted, anchor="middle", tracking=0.12)
+
+    c.footer("SEGMENTED · INSPECTED · REPLICATED  —  ONE ARCHITECTURE, TWO CITIES", "ZERO TRUST · HYBRID CLOUD · SOC TELEMETRY FROM BOTH SITES")
+    return c
+
+
 CARDS = {
     "01-boot": boot,
     "02-auth": auth,
@@ -471,10 +642,11 @@ CARDS = {
     "04-operations": operations,
     "05-threats": threats,
     "06-architecture": _tinted(dark_cards.hero, "cyan"),
-    "07-automation": _tinted(dark_cards.pipeline, "warn"),
-    "08-arsenal": _tinted(dark_cards.security, "red"),
-    "09-ecosystem": ecosystem,
-    "10-timeline-lab": timeline,
-    "11-telemetry": _tinted(dark_cards.telemetry, "blue"),
-    "12-comms": comms,
+    "07-network": network,
+    "08-automation": _tinted(dark_cards.pipeline, "warn"),
+    "09-arsenal": _tinted(dark_cards.security, "red"),
+    "10-ecosystem": ecosystem,
+    "11-timeline-lab": timeline,
+    "12-telemetry": _tinted(dark_cards.telemetry, "blue"),
+    "13-comms": comms,
 }
