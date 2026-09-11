@@ -46,8 +46,11 @@ jobs:
 
       - name: Sync telemetry and build
         env:
+          # PROFILE_TOKEN (a PAT with read:user) includes private contribution counts;
+          # without it the workflow falls back to the repo token: public activity only.
           PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
-        run: python3 tools/console/build.py --sync
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/console/build.py --sync --light && python3 tools/console/build.py --sync
 
       - name: Commit
         run: |
