@@ -22,6 +22,67 @@
 
 <img src="assets/clearance/12-comms.svg" width="100%" alt="Communication terminal: absaar.dev and github.com/absaar-404.">
 
+## AS-BUILT DRAWING SET
+
+The same systems, recorded the way infrastructure is recorded: an architectural drawing set. Paper in light mode, vellum in dark mode. Scale NTS; every number is a count.
+
+<a href="assets/sheets/A-100-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 700px)" srcset="assets/sheets/A-100-key-dark.svg">
+  <source media="(max-width: 700px)" srcset="assets/sheets/A-100-key-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/A-100-dark.svg">
+  <img alt="Sheet A-100, Site Plan: every system located by zone inside a hatched zero-trust perimeter; openings between rooms are access checkpoints; keynote list and legend." src="assets/sheets/A-100-light.svg" width="100%">
+</picture>
+</a>
+
+<details>
+<summary><b>Open the full set — A-200 · A-300 · A-400 · A-500 · D-501 · G-000</b></summary>
+<br>
+
+<a href="assets/sheets/A-200-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/A-200-dark.svg">
+  <img alt="Sheet A-200, Fleet Floor: onboarding riser — one administrator, three fields, one packaged process, a distribution bus and twenty-five endpoints; Service Core enlarged plan." src="assets/sheets/A-200-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="assets/sheets/A-300-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/A-300-dark.svg">
+  <img alt="Sheet A-300, Security Section: section through the perimeter with the Intrusion Alert System as an eight-layer enclosure around one server, and an elevation of the twenty-two engine SOC rack." src="assets/sheets/A-300-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="assets/sheets/A-400-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/A-400-dark.svg">
+  <img alt="Sheet A-400, Document Room: four intake lines — documents and drawings in, structured data out — inside a local-server boundary." src="assets/sheets/A-400-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="assets/sheets/A-500-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/A-500-dark.svg">
+  <img alt="Sheet A-500, Annex: enlarged plan with a scroll-driven camera path and camera stations for the spatial and AI systems." src="assets/sheets/A-500-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="assets/sheets/D-501-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/D-501-dark.svg">
+  <img alt="Sheet D-501, Capture Detail: HayaScope capture boundary — brackets sit outside the page; modes, annotation tools, exports and stability notes." src="assets/sheets/D-501-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="assets/sheets/G-000-light.svg">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheets/G-000-dark.svg">
+  <img alt="Sheet G-000, Cover: project title, key plan, sheet index and general notes." src="assets/sheets/G-000-light.svg" width="100%">
+</picture>
+</a>
+
+</details>
+
 <details>
 <summary><b>SERVICE REGISTER — all 26 systems</b></summary>
 <br>

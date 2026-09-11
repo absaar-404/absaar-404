@@ -4,7 +4,7 @@
     python3 tools/asbuilt/build.py            # build every sheet, light + dark
     python3 tools/asbuilt/build.py A-100      # build one sheet
     python3 tools/asbuilt/build.py --png      # also rasterise previews (ImageMagick)
-    python3 tools/asbuilt/build.py --readme   # also regenerate README.md from the template
+    python3 tools/asbuilt/build.py --readme   # (legacy) standalone drawing-set README — not used by the profile
 
 Data in, sheets out. Deterministic: the same data produces byte-identical
 SVG. Never hand-edit files in assets/sheets/.
@@ -90,7 +90,7 @@ def main(argv: list[str]) -> int:
                 built.append(path)
                 print(f"  {path.relative_to(ROOT)}  {path.stat().st_size/1024:.0f} KB")
 
-    if "--readme" in argv or not only:
+    if "--readme" in argv:
         write_readme(data)
 
     if want_png:
