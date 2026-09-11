@@ -572,26 +572,27 @@ def network(f: Fonts, data: dict) -> Card:
         d.rect(sx, 250, sw, 470, fill=P.panel2, stroke=P.line, width=1, rx=14, fill_opacity=0.6)
         c.mono(name, sx + 22, 282, 13, P.text, tracking=0.24, medium=True)
         c.mono(sub, sx + 22, 302, 10, P.muted, tracking=0.12)
-        # edge firewall
-        fx, fy = sx + 40, 330
+        # edge firewall — on the side facing the other site, so the tunnel is short and clear
+        colx = sx + 460 if hq else sx + 40
+        fx, fy = colx, 330
         box(fx, fy, 250, 58, "NGFW  ·  EDGE FIREWALL", "FORTINET · IPS · WEB FILTER · SSL INSPECTION", col=P.red)
         # core switch
-        kx, ky = sx + 40, 420
+        kx, ky = colx, 420
         box(kx, ky, 250, 58, "CORE SWITCH  ·  L3", "VLAN ROUTING · ACL · 802.1X", col=T)
         link(fx + 125, fy + 58, kx + 125, ky, dur=1.4)
         # identity / DC
-        ix_, iy_ = sx + 330, 330
+        ix_, iy_ = (sx + 40) if hq else (sx + 330), 330
         if hq:
             box(ix_, iy_, 380, 58, "IDENTITY  ·  ACTIVE DIRECTORY / ENTRA ID", "GPO · MFA · CONDITIONAL ACCESS · PRIVILEGED ACCESS", col=I)
             box(ix_, 420, 380, 58, "DATA CENTRE  ·  SERVERS", "FILE · APPS · VIRTUALISATION · BACKUP", col=T)
             box(ix_, 510, 380, 58, "SOC  ·  22 ENGINES", "WAZUH · VELOCIRAPTOR · SYSMON · TACTICAL RMM", col=P.purple)
-            link(kx + 250, ky + 29, ix_, ky + 29, dur=1.8)
+            link(ix_ + 380, ky + 29, kx, ky + 29, dur=1.8)
             link(ix_ + 190, iy_ + 58, ix_ + 190, 420, pk=False)
             link(ix_ + 190, 478, ix_ + 190, 510, pk=False)
         else:
             box(ix_, iy_, 380, 58, "IDENTITY  ·  READ-ONLY DOMAIN CONTROLLER", "CACHED CREDENTIALS · LOCAL AUTH · SYNCED POLICY", col=I)
             box(ix_, 420, 380, 58, "DR REPLICA  ·  SERVERS", "REPLICATED DATA · FAILOVER · BACKUP", col=T)
-            box(ix_, 510, 380, 58, "SOC AGENTS  ·  TELEMETRY FORWARDING", "ENDPOINT AGENTS → SITE A SOC OVER THE TUNNEL", col=P.purple)
+            box(ix_, 510, 380, 58, "SOC AGENTS  ·  TELEMETRY FORWARDING", "ENDPOINT AGENTS TO SITE A SOC OVER THE TUNNEL", col=P.purple)
             link(kx + 250, ky + 29, ix_, ky + 29, dur=1.8)
             link(ix_ + 190, iy_ + 58, ix_ + 190, 420, pk=False)
             link(ix_ + 190, 478, ix_ + 190, 510, pk=False)
@@ -599,7 +600,7 @@ def network(f: Fonts, data: dict) -> Card:
         segs = [("USERS", P.ok), ("SERVERS", T), ("OT / IOT", P.warn), ("GUEST", P.dim)] if hq else [("USERS", P.ok), ("SERVERS", T), ("GUEST", P.dim)]
         segw = 250 / len(segs) - 8
         for i, (nm, col) in enumerate(segs):
-            gx = sx + 40 + i * (segw + 8)
+            gx = colx + i * (segw + 8)
             gy = 600
             d.rect(gx, gy, segw, 88, fill="#FFFFFF", stroke=col, width=1.4, rx=8)
             c.mono(nm, gx + segw / 2, gy + 30, 9.5, P.text, anchor="middle", tracking=0.14, medium=True)
@@ -610,13 +611,15 @@ def network(f: Fonts, data: dict) -> Card:
             c.packet(gx + segw / 2, ky + 58, gx + segw / 2, gy - 6, 1.6 + i * 0.3, color=col, r=2.4, begin=i * 0.4)
             c.led(gx + segw / 2, gy + 70, col, r=2.5, dur=2 + i * 0.4)
         c.mono("EVERY SEGMENT BOUNDARY IS A CHECKPOINT  ·  EAST-WEST INSPECTED", sx + 40, 708, 9.5, P.muted, tracking=0.1)
+        if hq:
+            c.mono("SOC TELEMETRY FROM BOTH SITES", ix_, 600 + 30, 9.5, P.purple, tracking=0.14)
         # cloud link from firewall
         d.line(fx + 125, fy, fx + 125, cy0 + ch, stroke=I, width=1.2, stroke_dasharray="6 5", stroke_opacity=0.6) if not hq else None
         d.line(fx + 125, fy, fx + 125, cy0 + ch, stroke=I, width=1.2, stroke_dasharray="6 5", stroke_opacity=0.6) if hq else None
         c.packet(fx + 125, cy0 + ch, fx + 125, fy, 2.6, color=I, r=2.6, begin=0.8 if hq else 1.9)
 
     # ---- tunnel between the two edge firewalls
-    ax, ay = 72 + 40 + 250, 359          # site A firewall right edge
+    ax, ay = 72 + 460 + 250, 359         # site A firewall right edge
     bx = 980 + 40                         # site B firewall left edge
     d.line(ax, ay - 6, bx, ay - 6, stroke=T, width=2)
     d.line(ax, ay + 6, bx, ay + 6, stroke=T, width=2)
@@ -624,12 +627,12 @@ def network(f: Fonts, data: dict) -> Card:
     c.packet(ax, ay - 6, bx, ay - 6, 1.8, color=T, r=3.2)
     c.packet(bx, ay + 6, ax, ay + 6, 1.8, color=T, r=3.2, begin=0.9)
     mx = (ax + bx) / 2
-    d.rect(mx - 118, ay - 34, 236, 26, fill="#FFFFFF", stroke=T, width=1.2, rx=13)
-    # lock glyph
-    d.rect(mx - 104, ay - 25, 10, 8, fill="none", stroke=T, width=1.4, rx=1.5)
-    d.path(f"M{mx-102},{ay-25} v-3 a3,3 0 0 1 6,0 v3", fill="none", stroke=T, width=1.4)
-    c.mono("SITE-TO-SITE VPN  ·  WIREGUARD / IPSEC", mx + 4, ay - 16, 9.5, T, anchor="middle", tracking=0.14, medium=True)
-    c.mono("WAN  ·  ENCRYPTED  ·  MUTUAL AUTH  ·  IDENTITY BEFORE ROUTE", mx, ay + 34, 9.5, P.muted, anchor="middle", tracking=0.12)
+    d.rect(mx - 90, ay - 62, 180, 26, fill="#FFFFFF", stroke=T, width=1.2, rx=13)
+    d.rect(mx - 78, ay - 53, 10, 8, fill="none", stroke=T, width=1.4, rx=1.5)
+    d.path(f"M{mx-76},{ay-53} v-3 a3,3 0 0 1 6,0 v3", fill="none", stroke=T, width=1.4)
+    c.mono("S2S VPN · WIREGUARD/IPSEC", mx + 8, ay - 44, 9, T, anchor="middle", tracking=0.08, medium=True)
+    for j, ln in enumerate(["WAN · ENCRYPTED", "MUTUAL AUTH", "IDENTITY BEFORE ROUTE"]):
+        c.mono(ln, mx, ay + 30 + j * 16, 9, P.muted, anchor="middle", tracking=0.1)
 
     c.footer("SEGMENTED · INSPECTED · REPLICATED  —  ONE ARCHITECTURE, TWO CITIES", "ZERO TRUST · HYBRID CLOUD · SOC TELEMETRY FROM BOTH SITES")
     return c
