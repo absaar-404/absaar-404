@@ -95,11 +95,16 @@ C = _Colors()
 
 class Fonts:
     def __init__(self) -> None:
+        # Labels and small text use the same family as display/body (PetrumEX) so
+        # nothing small looks like a different, thinner font. A monospace face is
+        # kept only for terminal lines, where character alignment matters.
         req = {
             "display": "PetrumEX-Medium.otf",
             "body": "PetrumEX-Regular.otf",
-            "mono": "TBJTerminalMono-Regular.otf",
-            "mono_m": "TBJTerminalMono-Medium.otf",
+            "mono": "PetrumEX-Regular.otf",
+            "mono_m": "PetrumEX-Medium.otf",
+            "term": "GCRobutoMono-Regular.otf",
+            "term_m": "GCRobutoMono-Medium.otf",
         }
         missing = [f for f in req.values() if not (FONTS / f).exists()]
         if missing:
@@ -108,6 +113,8 @@ class Fonts:
         self.body = Face(FONTS / req["body"])
         self.mono = Face(FONTS / req["mono"])
         self.mono_m = Face(FONTS / req["mono_m"])
+        self.term = Face(FONTS / req["term"])
+        self.term_m = Face(FONTS / req["term_m"])
 
 
 def load_data() -> dict:
@@ -137,6 +144,9 @@ class Card:
         d.def_(f'<linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{self.accent}" stop-opacity="0"/><stop offset="1" stop-color="{self.accent}" stop-opacity="0.55"/></linearGradient>')
         d.def_(f'<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{self.accent}" stop-opacity="0.35"/><stop offset="1" stop-color="{self.accent}" stop-opacity="0"/></linearGradient>')
         d.def_(f'<linearGradient id="band" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{self.accent}"/><stop offset="1" stop-color="{self.accent}" stop-opacity="0.15"/></linearGradient>')
+        hi = "#FFFFFF" if P.name == "dark" else self.accent
+        d.def_(f'<linearGradient id="shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{hi}" stop-opacity="0"/>'
+               f'<stop offset="0.5" stop-color="{hi}" stop-opacity="0.9"/><stop offset="1" stop-color="{hi}" stop-opacity="0"/></linearGradient>')
         d.rect(0, 0, W, height, fill="url(#vig)")
         d.rect(0, 0, W, height, fill="url(#dots)")
         d.rect(1, 1, W - 2, height - 2, stroke=P.line, width=2, rx=18)
@@ -148,18 +158,42 @@ class Card:
 
     # -- lettering ---------------------------------------------------------
 
+    _shine_n = 0
+
     def t(self, face: Face, s: str, x: float, y: float, size: float, color: str | None = None,
-          anchor: str = "start", tracking: float = 0.0, opacity: float | None = None) -> float:
+          anchor: str = "start", tracking: float = 0.0, opacity: float | None = None, shine: bool = False) -> float:
         if not s:
             return 0.0
-        self.doc.path(face.path(s, x, y, size, anchor=anchor, tracking=tracking), fill=color or P.text, opacity=opacity)
-        return face.width(s, size, tracking)
+        d = face.path(s, x, y, size, anchor=anchor, tracking=tracking)
+        self.doc.path(d, fill=color or P.text, opacity=opacity)
+        w = face.width(s, size, tracking)
+        if shine and w > 0:
+            # a band of light passing over the letters, clipped to the glyphs
+            Card._shine_n += 1
+            cid = f"sh{Card._shine_n}"
+            x0 = x - (w / 2 if anchor == "middle" else (w if anchor == "end" else 0))
+            self.doc.def_(f'<clipPath id="{cid}"><path d="{d}"/></clipPath>')
+            band = max(60.0, w * 0.35)
+            begin = (Card._shine_n * 0.7) % 5.0
+            self.doc.add(f'<g clip-path="url(#{cid})"><rect x="{fmt(x0 - band)}" y="{fmt(y - size * 1.2)}" width="{fmt(band)}" '
+                         f'height="{fmt(size * 1.6)}" fill="url(#shine)">'
+                         f'<animateTransform attributeName="transform" type="translate" from="0 0" to="{fmt(w + 2 * band)} 0" '
+                         f'begin="{begin:.2f}s" dur="2.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1"/></rect></g>')
+        return w
 
-    def mono(self, s, x, y, size, color=None, anchor="start", tracking=0.12, opacity=None, medium=False):
-        return self.t(self.f.mono_m if medium else self.f.mono, s, x, y, size, color or P.muted, anchor, tracking, opacity)
+    def mono(self, s, x, y, size, color=None, anchor="start", tracking=0.12, opacity=None, medium=False, shine=False):
+        # small text is set in the label face at a legible floor; tracking is
+        # scaled down because the label face is proportional, not monospaced
+        size = size * 1.18 if size < 14 else size
+        size = max(size, 12.0)
+        return self.t(self.f.mono_m if medium else self.f.mono, s, x, y, size, color or P.muted, anchor, tracking * 0.55, opacity, shine)
 
-    def display(self, s, x, y, size, color=None, anchor="start", tracking=0.02):
-        return self.t(self.f.display, s, x, y, size, color or P.text, anchor, tracking)
+    def term(self, s, x, y, size, color=None, anchor="start", tracking=0.04, medium=False):
+        """Terminal lines: the one place a monospace face is used."""
+        return self.t(self.f.term_m if medium else self.f.term, s, x, y, max(size, 13.0), color or P.text, anchor, tracking)
+
+    def display(self, s, x, y, size, color=None, anchor="start", tracking=0.02, shine=True):
+        return self.t(self.f.display, s, x, y, size, color or P.text, anchor, tracking, None, shine)
 
     def body(self, s, x, y, size, color=None, anchor="start", tracking=0.0):
         return self.t(self.f.body, s, x, y, size, color or P.text, anchor, tracking)
@@ -183,7 +217,7 @@ class Card:
         """Card header strip: code tag, heading, optional status pill on the right."""
         d = self.doc
         self.mono(code, 72, 66, 11.5, P.dim, tracking=0.24)
-        self.mono(heading, 72, 96, 19, P.text, tracking=0.22, medium=True)
+        self.mono(heading, 72, 96, 19, P.text, tracking=0.22, medium=True, shine=True)
         if status:
             label, color = status
             w = self.f.mono_m.width(label, 12.5, 0.14) + 58
@@ -208,7 +242,7 @@ class Card:
             d.line(x + 18, y + 36, x + w - 18, y + 36, stroke=P.line, width=1)
 
     def kpi(self, x: float, y: float, big: str, small: str, color: str | None = None, size: float = 34) -> None:
-        self.display(big, x, y, size, color or P.text)
+        self.display(big, x, y, size, color or P.text, shine=True)
         self.mono(small, x, y + 20, 9.5, P.muted, tracking=0.16)
 
     def bar(self, x: float, y: float, w: float, h: float, frac: float, color: str | None = None, track: str | None = None) -> None:
@@ -227,6 +261,19 @@ class Card:
     def hexagon(self, x: float, y: float, r: float) -> str:
         pts = [(x + r * math.cos(math.radians(60 * i + 30)), y + r * math.sin(math.radians(60 * i + 30))) for i in range(6)]
         return "M" + " L".join(f"{fmt(a)},{fmt(b)}" for a, b in pts) + " Z"
+
+    def logo(self, x: float, y: float, size: float, shape: str = "round") -> None:
+        """Embed the brand mark (small JPEG, base64) clipped to a rounded tile or hexagon."""
+        import base64
+        data = base64.b64encode((HERE / "data" / "mark.jpg").read_bytes()).decode()
+        Card._shine_n += 1
+        cid = f"lg{Card._shine_n}"
+        if shape == "hex":
+            self.doc.def_(f'<clipPath id="{cid}"><path d="{self.hexagon(x + size / 2, y + size / 2, size / 2)}"/></clipPath>')
+        else:
+            self.doc.def_(f'<clipPath id="{cid}"><rect x="{fmt(x)}" y="{fmt(y)}" width="{fmt(size)}" height="{fmt(size)}" rx="{fmt(size * 0.22)}"/></clipPath>')
+        self.doc.add(f'<image x="{fmt(x)}" y="{fmt(y)}" width="{fmt(size)}" height="{fmt(size)}" clip-path="url(#{cid})" '
+                     f'href="data:image/jpeg;base64,{data}" preserveAspectRatio="xMidYMid slice"/>')
 
     def footer(self, left: str, right: str = "") -> None:
         y = self.h - 34

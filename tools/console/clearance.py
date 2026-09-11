@@ -26,13 +26,13 @@ def _typewriter(c: Card, lines: list[str], x: float, y: float, size: float, colo
     t = start
     for i, ln in enumerate(lines):
         text = prompt + ln
-        w = c.f.mono.width(text, size, 0.06) + 6
+        w = c.f.term.width(text, size, 0.04) + 6
         dur = max(0.4, len(text) * per_char)
         cid = f"tw{abs(hash((x, y, i, ln))) % 10**8}"
         d.def_(f'<clipPath id="{cid}"><rect x="{fmt(x-2)}" y="{fmt(y-size)}" width="0" height="{fmt(size*1.5)}">'
                f'<animate attributeName="width" from="0" to="{fmt(w)}" begin="{t:.2f}s" dur="{dur:.2f}s" fill="freeze"/></rect></clipPath>')
         d.add(f'<g clip-path="url(#{cid})">')
-        c.mono(text, x, y, size, color, tracking=0.06)
+        c.term(text, x, y, size, color)
         d.add("</g>")
         t += dur + gap
         y += size * 2.1
@@ -129,8 +129,9 @@ def boot(f: Fonts, data: dict) -> Card:
     _ascii_animation(c, ax + 40, ay + 60, aw - 80, ah - 120, P.blue)
     c.mono("PROCEDURAL · 24 FRAMES · NO IMAGES", ax + aw / 2, ay + ah - 20, 9.5, P.dim, anchor="middle", tracking=0.2)
 
-    c.display(profile["name"], 72, 690, 30, P.text)
-    c.mono(profile["role"], 300, 690, 12.5, P.muted, tracking=0.18)
+    c.logo(72, 652, 48)
+    c.display(profile["name"], 136, 690, 30, P.text)
+    c.mono(profile["role"], 372, 690, 12.5, P.muted, tracking=0.18)
     c.mono(f"{profile['brief']['location']}   ·   {profile['site']}", 1728, 690, 12, P.muted, anchor="end", tracking=0.14)
     return c
 
@@ -147,8 +148,8 @@ def auth(f: Fonts, data: dict) -> Card:
     c.panel(bx, by, bw, bh)
     d.rect(bx, by, 10, bh, fill=P.ok, rx=5)
     # avatar hex with initial
-    d.path(c.hexagon(bx + 110, by + 130, 70), fill="#F1F5F9", stroke=P.ok, width=2)
-    c.display("A", bx + 110, by + 154, 66, P.ok, anchor="middle")
+    c.logo(bx + 40, by + 60, 140, shape="hex")
+    d.path(c.hexagon(bx + 110, by + 130, 70), fill="none", stroke=P.ok, width=2)
     c.mono("CLEARANCE", bx + 220, by + 62, 10.5, P.dim, tracking=0.24)
     c.display(profile["name"], bx + 220, by + 100, 36)
     c.mono(profile["role"], bx + 220, by + 128, 11.5, P.muted, tracking=0.14)

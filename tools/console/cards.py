@@ -38,9 +38,10 @@ def hero(f: Fonts, data: dict) -> Card:
     n_up = sum(1 for s in systems["systems"] if s["status"] == "BUILT")
     n_dep = n_total - n_up
 
-    c.display(profile["name"], 72, 118, 68)
-    c.mono(profile["role"], 74, 154, 15, C.MUTED, tracking=0.16)
-    c.mono(f"{profile['cluster']}  //  {profile['sector']}", 74, 182, 12.5, C.ACCENT, tracking=0.2)
+    c.logo(72, 62, 96)
+    c.display(profile["name"], 190, 118, 68)
+    c.mono(profile["role"], 192, 154, 15, C.MUTED, tracking=0.16)
+    c.mono(f"{profile['cluster']}  //  {profile['sector']}", 192, 182, 12.5, C.ACCENT, tracking=0.2)
 
     px, py, pw, ph = 1330, 78, 398, 46
     d.rect(px, py, pw, ph, stroke=C.OK, width=1.4, fill=C.PANEL, rx=23, fill_opacity=0.9)
